@@ -1,0 +1,23 @@
+- name: Configure iptables
+  hosts: all
+  become: true
+  tasks:
+    - name: Allow traffic on port 9100 from specific IP
+      ansible.builtin.iptables:
+        chain: INPUT
+		protocol: tcp
+		destination_port: 9100
+		source: 123.145.167.254
+		jump: ACCEPT
+
+    - name: Allow SSH traffic on port 37656 from any IP
+      ansible.builtin.iptables:
+        chain: INPUT
+        protocol: tcp
+        destination_port: 37656
+        jump: ACCEPT
+
+    - name: Deny all other incoming traffic
+      ansible.builtin.iptables:
+        chain: INPUT
+        policy: DROP

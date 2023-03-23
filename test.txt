@@ -1,0 +1,71 @@
+Мерзлов Є.О.
+
+1. 
+sudo -s
+wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add -
+echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
+apt update
+apt install anydesk
+1.1 
+systemctl is-enabled anydesk
+1.2 
+systemctl disable anydesk
+
+
+2.
+apt install curl
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py --user
+python3 -m pip install --user ansible-core==2.12.0
+ansible --version
+2.1
+sudo apt-mark hold ansible
+
+
+3.0 Сервер test.chmsoft.com.ua не доступний подальші дії виконувались на тестовій ВМ
+3.1
+echo "Port 37656" >> /etc/ssh/sshd_config 
+service ssh restart
+3.2
+echo "PermitRootLogin no" >> /etc/ssh/sshd_config 
+service ssh restart
+3.3
+echo "PasswordAuthentication no" >> /etc/ssh/sshd_config 
+service ssh restart 
+3.4
+ssh-keygen
+ssh-copy-id chameleon@test.chmsoft.com.ua
+
+
+4.
+ip addr | grep -A 2 'Micro-star Intl'
+
+
+5.
+може бути у файлі /etc/postfix/sasl_passwd
+
+
+6.
+tar -czvf new-site.chmsoft.com.ua.tar.gz /var/www/new-site.chmsoft.com.ua
+scp new-site.chmsoft.com.ua.tar.gz user@new-webserver.chmsoft.com.ua:/home/user/new_site/
+6.1
+tar -xzvf new-site.chmsoft.com.ua.tar.gz
+
+
+7.
+SELECT name, last_login FROM site.webusers WHERE time_create > '2023-03-20';
+
+
+8.
+Файли у завданні 10
+
+
+9.
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh ./get-docker.sh
+docker pull nginx
+9.1
+docker run -d -p 8080:80 nginx
+
+
+10. Рерозиторій на github https://github.com/Miozzik/test_work гілка dev
